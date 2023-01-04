@@ -20,6 +20,7 @@ function init(){
     getWins();
     getlosses();
 }
+  
 
 function winGame() {
     wordSpace.textContent = "You Won"
@@ -54,8 +55,9 @@ function setTimer(){
        }, 1000) };
 
        function displaySpaces() {
-       var randomVal = wordBank[Math.floor(wordBank.length * Math.random())];
-       lettersInWord = randomVal.split("")
+        isWin = false
+       chosenWord = wordBank[Math.floor(wordBank.length * Math.random())];
+       lettersInWord = chosenWord.split("")
        numBlanks = lettersInWord.length
        blanksLetters = []
        for (var i = 0; i < numBlanks; i++){
@@ -117,6 +119,7 @@ function setTimer(){
         }
       }
 
+
       document.addEventListener("keydown", function(event) {
         if (seconds === 0) {
           return;
@@ -127,14 +130,18 @@ function setTimer(){
           var letterGuessed = event.key;
           checkLetters(letterGuessed)
           checkWin();
-        }
-      });
+         
+        } console.log(event)
+      })
+      
 
       init()
       
 
        startButton.addEventListener("click", setTimer)
        startButton.addEventListener("click",displaySpaces)
+
+
 
 
     
