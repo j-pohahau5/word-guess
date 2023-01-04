@@ -94,10 +94,43 @@ function setTimer(){
         userLosses.textContent = loseCounter;
       }
 
-      
-      
-      
-      
+      function checkWin() {
+        if (chosenWord === blanksLetters.join("")) {
+          isWin = true;
+        }
+      }
+
+      function checkLetters(letter) {
+        var letterInWord = false;
+        for (var i = 0; i < numBlanks; i++) {
+          if (chosenWord[i] === letter) {
+            letterInWord = true;
+          }
+        }
+        if (letterInWord) {
+          for (var j = 0; j < numBlanks; j++) {
+            if (chosenWord[j] === letter) {
+              blanksLetters[j] = letter;
+            }
+          }
+          wordSpace.textContent = blanksLetters.join(" ");
+        }
+      }
+
+      document.addEventListener("keydown", function(event) {
+        if (seconds === 0) {
+          return;
+        }
+        var key = event.key.toLowerCase();
+        var alphabetNumericCharacters = "abcdefghijklmnopqrstuvwxyz0123456789 ".split("");
+        if (alphabetNumericCharacters.includes(key)) {
+          var letterGuessed = event.key;
+          checkLetters(letterGuessed)
+          checkWin();
+        }
+      });
+
+      init()
       
 
        startButton.addEventListener("click", setTimer)
